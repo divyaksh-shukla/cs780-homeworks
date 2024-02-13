@@ -53,9 +53,64 @@ array([[0. , 0. , 0. , 0. , 0. , 0.1, 0. ]]),
 
     \begin{figure}[h]
         \centering
-        \includegraphics[width=\textwidth]{images/mc_td/first_visit_exponential_0.1_0.0001_episode_values.pdf}
+        \includegraphics[width=\textwidth]{images/mc_td/first_visit_exponential_0.1_0.0008_episode_values.pdf}
         \caption{FVMC with exponential decay and tuned hyperparameters}
         \label{fig:tuned_fvmc}
     \end{figure}
+
+    \item I plotted the state-values for each state for Every-Visit MC in Figure \ref{fig:default_evmc} and \ref{fig:tuned_evmc}. We can see from the from the figures that there is initially very high variance in the state-values but as the number of episodes increase the variance decreases and the state-values converge to the true values. The variance is higher in the default case as the step size is too high and the decay is too slow. I then tuned the hyperparameters and the variance is lower in the tuned case as the step size is lower and the final value is also very low, while achieving very low bias on the true values. On the log-scale plot, we can make a better judgement on the high variance phenomenon of Monte Carlo methods.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/every_visit_exponential_0.5_0.01_episode_values.pdf}
+        \caption{EVMC with exponential decay of step size}
+        \label{fig:default_evmc}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/every_visit_exponential_0.1_0.0008_episode_values.pdf}
+        \caption{EVMC with exponential decay and tuned hyperparameters}
+        \label{fig:tuned_evmc}
+    \end{figure}
+
+    \item I plotted the state-values for each state for TD prediction in Figure \ref{fig:default_td} and \ref{fig:tuned_td}. Before and after tuning we can observe that the variance in all the state-values of TD are low but the state-values never seem to converge at the true values. This shows the high bias TD learning has, as discussed in class.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/td_learning_exponential_0.5_0.01_episode_values.pdf}
+        \caption{TD with exponential decay of step size}
+        \label{fig:default_td}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/td_learning_exponential_0.1_0.002_episode_values.pdf}
+        \caption{TD with exponential decay and tuned hyperparameters}
+        \label{fig:tuned_td}
+    \end{figure}
+
+    \item In this question I wrote a routine to run experiments for \texttt{max\_runs} number of times. The routine runs First-Visit MC, Every-Visit MC and TD learning for \texttt{max\_episodes} number of episodes using the tuned hyperparameters for each of the algorithms. The routine then plots the average state-values across all runs for each algorithm. The results are shown in Figure \ref{fig:average_fvmc}, \ref{fig:average_evmc} and \ref{fig:average_td}. We can see that the average state-values for First-Visit MC and Every-Visit MC converge to the true values but the average state-values for TD learning do not converge to the true values. This is consistent with the general behaviours of the algorithms.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/fvmc_experiments_50.pdf}
+        \caption{Average state-values of 50 runs of FVMC with exponential decay and tuned hyperparameters}
+        \label{fig:average_fvmc}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/evmc_experiments_50.pdf}
+        \caption{Average state-values of 50 runs of EVMC with exponential decay and tuned hyperparameters}
+        \label{fig:average_evmc}
+    \end{figure}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=\textwidth]{images/mc_td/td_experiments_50.pdf}
+        \caption{Average state-values of 50 runs of TD with exponential decay and tuned hyperparameters}
+        \label{fig:average_td}
+    \end{figure}
+    
+    \item \textbf{Comparision of FVMC, EVMC and TD based on state-value functions across episodes and log-scale of episodes:} We can see that the state-values for FVMC and EVMC converge to the true values but the state-values for TD learning do not converge to the true values. This is consistent with the general behaviours of the algorithms. The variance in the state-values for FVMC and EVMC is higher than TD learning but the bias in the state-values for TD learning is higher than FVMC and EVMC. The plot on log-scale helps us to zoom into the first few episodes and make a better judgement on the high variance phenomenon of Monte Carlo methods.
+    \item \textbf{Comparision of FVMC, EVMC and TD based on average target value for state 3:} We can see that the average across episodes for FVMC and EVMC osciilates between 0 and 1 but the average for TD learning has fewer oscillations but does not land at the true values. Thus, this is another view to note the high variance in Monte Carlo methods and the high bias in TD learning.
 
 \end{enumerate}
