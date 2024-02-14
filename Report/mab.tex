@@ -1,4 +1,7 @@
 \Solution{1: Multi-armed Bandits}
+\\
+
+\noindent Code available at: \url{http://tinyurl.com/cs780-assignment-1-p1}
 \begin{enumerate}
     \item Created the environment using Gymnasium library. The environment is a 2-armed bernoulli bandit with some stochasticity. The environment characteristics are taken from a config file which specify the $\alpha$ and $\beta$ values. I tested out with different values of $\alpha$ and $\beta$ $[(0,0), (0,1), (1,0), (1,1), (0.5,0.5)]$ and the environment is working as expected. The agent recieves a reward only if it takes an action which takes it correctly in the direction of movement. That is if the the agent moves `left' and lands in state $1$ or moves `right' and lands in state $2$, only then it gets a positive reward. 
     
@@ -22,50 +25,58 @@
     
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{images/mab/bernoulli_average_reward_per_episode.pdf}
-        \caption{Average reward of 2-armed Bernoulli Bandit}
-        \label{fig:bernoulli_reward}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{images/mab/bernoulli_average_reward_per_episode.pdf}
+            \caption{Average reward}
+            \label{fig:bernoulli_reward}
+        \end{subfigure}
+
+        \begin{subfigure}[b]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{images/mab/bernoulli_average_regret_per_episode.pdf}
+            \caption{Average regret}
+            \label{fig:bernoulli_regret}
+        \end{subfigure}
+
+        \begin{subfigure}[b]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{images/mab/bernoulli_optimal_actions_percentage_per_episode.pdf}
+            \caption{Optimal Action \%}
+            \label{fig:bernoulli_optimal_action}
+        \end{subfigure}
+        \caption{Results of 2-armed Bernoulli Bandit}
+
     \end{figure}
 
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{images/mab/10_arm_gaussian_average_reward_per_episode.pdf}
-        \caption{Average reward of 10-armed Gaussian Bandit}
-        \label{fig:gaussian_reward}
-    \end{figure}
+    \item Created a plot of the average regret of the agents for the 2-armed Bernoulli Bandit. Figure \ref{fig:bernoulli_regret} shows the average regret of the agents for the 2-armed Bernoulli Bandit. From the plot we can see that Greedy agent has the highest regret and it is continuously increasing. The epsilon-greedy and pure exploration agents have similar regret values. The regret of epsilon-decay rises as it is exploring but flattens out once it is confident about its environment. While the UBC and Softmax agents do not have much regret.
+    
 
-    \item Created a plot of the average regret of the agents for the 2-armed Bernoulli Bandit. 
+    \item Created a plot of the average regret of the agents for the 10-armed Gaussian Bandit. Figure \ref{fig:gaussian_regret} shows the average regret of the agents for the 10-armed Gaussian Bandit. From the plot we can see that Pure exploration leads to random reward retrivals making the agent gather more regret. The epsilon-greedy, epsilon-decay and UCB agents have similar regret values. While the greedy and softmax agents are very similar in regret values. We also notice that the regret does not sigificantly flatten out for any agent. Thus, we may need to run more steps to see the regret flatten out.
     \begin{figure}[h]
         \centering
-        \includegraphics[width=0.8\textwidth]{images/mab/bernoulli_average_regret_per_episode.pdf}
-        \caption{Average regret of 2-armed Bernoulli Bandit}
-        \label{fig:bernoulli_regret}
-    \end{figure}
-
-    \item Created a plot of the average regret of the agents for the 10-armed Gaussian Bandit.
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{images/mab/10_arm_gaussian_average_regret_per_episode.pdf}
-        \caption{Average regret of 10-armed Gaussian Bandit}
-        \label{fig:gaussian_regret}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{images/mab/10_arm_gaussian_average_reward_per_episode.pdf}
+            \caption{Average reward}
+            \label{fig:gaussian_reward}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \includegraphics[width=\textwidth]{images/mab/10_arm_gaussian_average_regret_per_episode.pdf}
+            \caption{Average regret}
+            \label{fig:gaussian_regret}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.3\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{images/mab/10_arm_gaussian_optimal_actions_percentage_per_episode.pdf}
+            \caption{Optimal Action \%}
+            \label{fig:gaussian_optimal_action}
+        \end{subfigure}
+        \caption{Results of 10-armed Gaussian Bandit}
+        
     \end{figure}
 
     \item This is the same as question 4. 
     
-    \item Plotting the optimal action percentage of each agent for the 2-armed Bernoulli Bandit.
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{images/mab/bernoulli_optimal_actions_percentage_per_episode.pdf}
-        \caption{Optimal Action \% of 2-armed Bernoulli Bandit}
-        \label{fig:bernoulli_optimal_action}
-    \end{figure}
+    \item Plotting the optimal action percentage of each agent for the 2-armed Bernoulli Bandit. Running 50 experiments did not reduce the variance by a noticeable margin, making the plots look very noisy. The results are shown in Figure \ref{fig:bernoulli_optimal_action}. From the plot we can see that the greedy agent has the lowest optimal action percentage. The epsilon-greedy and pure exploration agents have similar optimal action percentage, which means I have to change the eplison value even more. The UCB and Softmax agents have the highest optimal action percentage. While the epsilon-decay agent shows potential as its optimal action percentage increases with time. Running more expisodes could've proven the epsilon-decay agent to be the best.
 
-    \item Plotting the optimal action percentage of each agent for the 10-armed Gaussian Bandit.
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=0.8\textwidth]{images/mab/10_arm_gaussian_optimal_actions_percentage_per_episode.pdf}
-        \caption{Optimal Action \% of 10-armed Gaussian Bandit}
-        \label{fig:gaussian_optimal_action}
-    \end{figure}
+    \item Plotting the optimal action percentage of each agent for the 10-armed Gaussian Bandit. The plots here are not as noisy as the 2-armed Bernoulli Bandit. The results are shown in Figure \ref{fig:gaussian_optimal_action}. From the plot we can see that the Pure exploration has the lowest optimal action percentage, which is inline with the regret plot of Pure exploration. This is followed by greedy and softmax agents. The optimal-action percentage plot shows that epsilon-greedy and epsilon-decay agents have the best action selection strategy and beat UCB agent by a noticeable margin, which is not evident from the regret plots.
+    
 
 \end{enumerate}
