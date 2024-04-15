@@ -1,0 +1,6 @@
+AGENT,N_RUNS,MAX_EPISODE_STEPS,env,SEED,N_EPISODES,GAMMA,NOISE_SCALE_RATIO,MIN_SAMPLES,EPOCHS,TAU,BATCH_SIZE,UPDATE_FREQUENCY,BUFFER_SIZE,VALUE_HDIM,POLICY_HDIM,POLICY_OPTIM,VALUE_OPTIM,POLICY_LR,VALUE_LR,MAX_TRAIN_EPISODES,MAX_EVAL_EPISODES,DEVICE
+DDPG,5,200,Hopper-v4,42,120,0.99,0.1,512,10,0.005,512,20,100000,[32, 32],[32, 32],<class 'torch.optim.rmsprop.RMSprop'>,<class 'torch.optim.rmsprop.RMSprop'>,1e-06,1e-06,120,1,cpu
+TD3,5,200,Hopper-v4,42,120,0.99,0.1,512,10,0.005,512,20,100000,[32, 32],[32, 32],<class 'torch.optim.rmsprop.RMSprop'>,<class 'torch.optim.rmsprop.RMSprop'>,5e-05,5e-05,120,1,cpu
+DDPG,5,1000,Hopper-v4,42,200,0.99,0.1,512,40,0.05,512,20,100000,[32, 32],[32, 32],<class 'torch.optim.sgd.SGD'>,<class 'torch.optim.sgd.SGD'>,5e-07,5e-07,200,1,cpu
+TD3,5,1000,Hopper-v4,42,200,0.99,0.1,512,40,0.005,512,20,100000,[32, 32],[32, 32],<class 'torch.optim.rmsprop.RMSprop'>,<class 'torch.optim.rmsprop.RMSprop'>,5e-05,5e-05,200,1,cpu
+DDPG,5,120,Pendulum-v1,42,500,0.99,0.1,128,40,0.001,64,20,1000000,[400, 300],[400, 300],<class 'torch.optim.rmsprop.RMSprop'>,<class 'torch.optim.rmsprop.RMSprop'>,0.0001,0.001,500,1,cpu
